@@ -1,22 +1,29 @@
-```{r}
-library(tidyverse)
+---
+title: "day 01"
+---
 
-expense <- read_csv("data/aoc_01.txt", col_names = "fee1")
+```{r, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r}
-expense%>% 
-  crossing(fee2 = expense$fee1) %>% 
-  filter(fee1 + fee2 == 2020) %>% 
+library(tidyverse)
+
+expense <- read_csv("aoc_01.txt", col_names = "fee1")
+```
+
+```{r}
+expense %>%
+  crossing(fee2 = .$fee1) %>%
+  filter(fee1 + fee2 == 2020) %>%
   mutate(product = fee1 * fee2)
 ```
 
 
 ```{r}
-expense%>% 
-  crossing(fee2 = expense$fee1) %>% 
-  crossing(fee3 = expense$fee1) %>% 
-  filter(fee1 + fee2 + fee3 == 2020) %>% 
+expense %>%
+  crossing(fee2 = .$fee1) %>%
+  crossing(fee3 = .$fee1) %>%
+  filter(fee1 + fee2 + fee3 == 2020) %>%
   mutate(product = fee1 * fee2 * fee3)
 ```
-

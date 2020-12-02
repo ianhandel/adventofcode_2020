@@ -1,27 +1,35 @@
+---
+title: "🎄🎄🎄 day 01  🎄🎄🎄"
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+from @drob - why did I read his answer first??
+
 ```{r}
 library(tidyverse)
 
-# from @drob
-
-passwords <- read_csv("data/aoc_02.txt", col_names = "policy") %>% 
+passwords <- read_csv("aoc_02.txt", col_names = "policy") %>%
   extract(policy,
-          c("min", "max", "letter", "password"),
-          "(\\d+)-(\\d+) (.): *(.*)",
-          convert = TRUE)
+    c("min", "max", "letter", "password"),
+    "(\\d+)-(\\d+) (.): *(.*)",
+    convert = TRUE
+  )
 ```
 
 ```{r}
-passwords %>% 
-  mutate(count = map2_int(password, letter, str_count)) %>% 
-  filter(count>= min & count <= max) %>% 
+passwords %>%
+  mutate(count = map2_int(password, letter, str_count)) %>%
+  filter(count >= min & count <= max) %>%
   nrow()
 ```
 
 ```{r}
-passwords %>% 
+passwords %>%
   mutate(count = (str_sub(password, min, min) == letter) +
-                           (str_sub(password, max, max) == letter)) %>% 
+    (str_sub(password, max, max) == letter)) %>%
   filter(count == 1)
 ```
-
-
