@@ -1,6 +1,6 @@
 # Advent of Code 2020
 
-[](https://adventofcode.com)
+(https://adventofcode.com)
 
 Planning to give up after more days than usual (median about 3 IQR about 1)
 
