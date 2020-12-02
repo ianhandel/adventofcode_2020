@@ -17,11 +17,23 @@ passwords <- read_csv("aoc_02.txt", col_names = "policy") %>%
 ``` r
 passwords %>%
   mutate(count = map2_int(password, letter, str_count)) %>%
-  filter(count >= min & count <= max) %>%
-  nrow()
+  filter(count >= min & count <= max)
 ```
 
-    ## [1] 666
+    ## # A tibble: 666 x 5
+    ##      min   max letter password             count
+    ##    <int> <int> <chr>  <chr>                <int>
+    ##  1     3    11 c      ccchcccccclxnkcmc       11
+    ##  2     4     5 s      gssss                    4
+    ##  3     7    14 m      mmcmqmmxmmmnmmrmcxc     11
+    ##  4     3    12 n      grnxnbsmzttnzbnnn        6
+    ##  5     6    10 h      hhnhhhhxhkh              8
+    ##  6     6     8 z      zhgztgjzzfzqzzvnbmv      7
+    ##  7     8    13 b      bbbbbbbbqjbbb           11
+    ##  8     7     8 k      kkgkkbskkk               7
+    ##  9     1     3 g      gdmvgb                   2
+    ## 10     5    15 g      gggzgpsgsgglxgqdfggg    11
+    ## # … with 656 more rows
 
 ``` r
 passwords %>%

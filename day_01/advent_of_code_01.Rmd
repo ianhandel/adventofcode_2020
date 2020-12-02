@@ -1,5 +1,6 @@
 ---
-title: "day 01"
+title: "🎄🎄🎄day 02 🎄🎄🎄"
+output: github_document
 ---
 
 ```{r, include = FALSE}
@@ -7,7 +8,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r}
-library(tidyverse)
+library(tidyveuserse)
 
 expense <- read_csv("aoc_01.txt", col_names = "fee1")
 ```

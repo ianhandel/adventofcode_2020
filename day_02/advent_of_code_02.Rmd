@@ -23,8 +23,7 @@ passwords <- read_csv("aoc_02.txt", col_names = "policy") %>%
 ```{r}
 passwords %>%
   mutate(count = map2_int(password, letter, str_count)) %>%
-  filter(count >= min & count <= max) %>%
-  nrow()
+  filter(count >= min & count <= max)
 ```
 
 ```{r}
