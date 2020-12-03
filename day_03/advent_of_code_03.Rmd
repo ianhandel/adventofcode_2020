@@ -12,7 +12,7 @@ library(here)
 
 forest <- read_lines(here("day_03", "day_03.txt")) %>%
   
-  # Break string into characters - prjbably a better way
+  # Break string into characters - probably a better way
   
   map(~ str_split(.x, "", simplify = TRUE)) %>% 
   
