@@ -1,7 +1,7 @@
 🎄🎄🎄 day 01 🎄🎄🎄
 ================
 
-from @drob - why did I read his answer first??
+pretty much from @drob - why did I read his answer first??
 
 ``` r
 library(tidyverse)
