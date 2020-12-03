@@ -6,7 +6,13 @@ library(tidyverse)
 library(here)
 
 forest <- read_lines(here("day_03", "day_03.txt")) %>%
+  
+  # Break string into characters - prjbably a better way
+  
   map(~ str_split(.x, "", simplify = TRUE)) %>% 
+  
+  # I wish I'd found this function sooner...
+  
   stringi::stri_list2matrix(byrow = TRUE)
 ```
 
@@ -18,14 +24,20 @@ forest <- read_lines(here("day_03", "day_03.txt")) %>%
 count_trees <- function(forest, start_x, start_y, step_x, step_y){
 
   # furthest steps - limits of forest one way or another
+  
   steps <- max(nrow(forest) %/% step_y, ncol(forest) %/% step_y)
 
+  # vectors of x and y steps
+  
   x_locations <- seq(from = start_x, length.out = steps, by = step_x)
   y_locations <- seq(from = start_y, length.out = steps, by = step_y)
   
   # wrap round at edges of forest
+  # uses modulo division to wrap back into forest
   
   indices <- cbind((y_locations[1:steps]-1) %% nrow(forest) + 1, (x_locations[1:steps]-1) %% ncol(forest) + 1)
+  
+  # count trees - using index a matrix by a matrix - see ?`[
   
   sum(forest[indices] == "#")
 }
@@ -49,6 +61,9 @@ slopes <- tribble(~step_x, ~step_y,
 
 
 slopes %>% 
+  
+  # just uses the count_trees function for all test cases
+  
   mutate(trees = map2_int(step_x, step_y, count_trees, start_x = 1, start_y = 1, forest = forest)) %>% 
   pull(trees) %>% 
   prod()
