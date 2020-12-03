@@ -1,0 +1,38 @@
+🎄🎄🎄 day 03 🎄🎄🎄
+================
+
+``` r
+library(tidyverse)
+library(here)
+
+forest <- read_lines(here("day_03", "day_03.txt")) %>%
+  map(~ str_split(.x, "", simplify = TRUE)) %>% 
+  stringi::stri_list2matrix(byrow = TRUE)
+```
+
+### Part 1
+
+``` r
+# count tress in one patch
+
+count_trees <- function(forest, start_x, start_y, step_x, step_y){
+
+  # furthest steps - limits of forest one way or another
+  steps <- max(nrow(forest) %/% step_y, ncol(forest) %/% step_y)
+
+  x_locations <- seq(from = start_x, length.out = steps, by = step_x)
+  y_locations <- seq(from = start_y, length.out = steps, by = step_y)
+  
+  # wrap round at edges of forest
+  
+  indices <- cbind((y_locations[1:steps]-1) %% nrow(forest) + 1, (x_locations[1:steps]-1) %% ncol(forest) + 1)
+  
+  sum(forest[indices] == "#")
+}
+
+
+
+count_trees(forest, 1, 1, 3, 1)
+```
+
+    ## [1] 191
