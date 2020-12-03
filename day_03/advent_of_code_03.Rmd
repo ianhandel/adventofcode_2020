@@ -18,7 +18,7 @@ forest <- read_lines(here("day_03", "day_03.txt")) %>%
 ### Part 1
 
 ```{r}
-# count tress in one patch
+# count tress in forest (recycles forest)
 
 count_trees <- function(forest, start_x, start_y, step_x, step_y){
 
@@ -40,6 +40,26 @@ count_trees <- function(forest, start_x, start_y, step_x, step_y){
 count_trees(forest, 1, 1, 3, 1)
 
 
+
+```
+
+
+### Part 2
+
+```{r}
+
+slopes <- tribble(~step_x, ~step_y,
+                  1, 1,
+                  3, 1,
+                  5, 1,
+                  7, 1,
+                  1, 2)
+
+
+slopes %>% 
+  mutate(trees = map2_int(step_x, step_y, count_trees, start_x = 1, start_y = 1, forest = forest)) %>% 
+  pull(trees) %>% 
+  prod()
 
 ```
 
