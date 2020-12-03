@@ -42,7 +42,7 @@ count_trees <- function(forest, start_x, start_y, step_x, step_y){
   
   indices <- cbind((y_locations[1:steps]-1) %% nrow(forest) + 1, (x_locations[1:steps]-1) %% ncol(forest) + 1)
   
-  # count trees - using index a matrix by a matrix - see ?`[
+  # count trees - using index a matrix by a matrix - see ?`[`
   
   sum(forest[indices] == "#")
 }
