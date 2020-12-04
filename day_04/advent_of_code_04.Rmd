@@ -53,7 +53,7 @@ Need to have...
 keys_needed <- c("byr", "iyr", "eyr", "hgt",
                  "hcl", "ecl", "pid")
 
-pass %>% 
+valid <- pass %>% 
   group_by(id) %>%
   select(id, key) %>% 
   
@@ -63,8 +63,74 @@ pass %>%
   
   # count valid keys!
   
-  summarise(count = sum(key %in% keys_needed)) %>% 
-  filter(count == length(keys_needed))
+  summarise(valid = sum(key %in% keys_needed) == length(keys_needed)) %>% 
+  filter(valid)
+
+valid
+  
+```
+
+### Part 2 
+
+Now also require...
+
+* byr (Birth Year) - four digits; at least 1920 and at most 2002.
+* iyr (Issue Year) - four digits; at least 2010 and at most 2020.
+* eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
+* hgt (Height) - a number followed by either cm or in:
+  + If cm, the number must be at least 150 and at most 193.
+  + If in, the number must be at least 59 and at most 76.
+* hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
+* ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
+* pid (Passport ID) - a nine-digit number, including leading zeroes.
+* cid (Country ID) - ignored, missing or not.
+
+
+```{r}
+pass %>% 
+  
+  
+  # filter as above
+  
+  inner_join(valid, by = "id") %>% 
+
+
+  # make columns as easier to manage
+  
+  pivot_wider(names_from = key, values_from = value) %>% 
+  
+  # rules one by one
+  
+  mutate(byr_valid = if_else(str_detect(byr, "^\\d{4}$") &
+                         between(parse_integer(byr), 1920, 2002),
+                       TRUE,
+                       FALSE),
+         
+         iyr_valid = if_else(str_detect(iyr, "^\\d{4}$") &
+                         between(parse_integer(iyr), 2010, 2020),
+                       TRUE,
+                       FALSE),
+         
+         eyr_valid = if_else(str_detect(eyr, "^\\d{4}$") &
+                         between(parse_integer(eyr), 2020, 2030),
+                       TRUE,
+                       FALSE),
+         
+         # yeah yeah - should've written a function for above bit
+         
+         hgt_valid = case_when(!str_detect(hgt, "^\\d+(in|cm)") ~ FALSE,
+                               str_detect(hgt, "cm") & !between(parse_number(hgt), 150, 193) ~ FALSE,
+                               str_detect(hgt, "in") & !between(parse_number(hgt),  59, 76)  ~ FALSE,
+                         TRUE ~ TRUE),
+         
+         hcl_valid = str_detect(hcl, "^#([0-9]|[a-f]){6}$"),
+         
+         ecl_valid = str_detect(ecl, "^(amb|blu|brn|gry|grn|hzl|oth)"),
+         
+         pid_valid = str_detect(pid, "^\\d{9}$")) %>%
+  
+  filter(byr_valid & iyr_valid & eyr_valid & hgt_valid & hcl_valid & ecl_valid & pid_valid)
+  
   
 ```
 
