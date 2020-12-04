@@ -1,0 +1,71 @@
+---
+title: "🎄🎄🎄 day 04  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+pass <- read_csv(here("day_04", "day_4.txt"),
+                 col_names = "raw",
+                 skip_empty_rows = FALSE) %>%
+  
+  # make an id row by counting blank rows
+  
+  mutate(id = cumsum(is.na(raw))) %>% 
+  filter(!is.na(raw)) %>% 
+  
+  # split pairs and make into single rows per pair
+  
+  mutate(raw = str_split(raw, " ")) %>% 
+  unnest(raw) %>% 
+  
+  # separate key:value pairs
+  
+  separate(raw, into = c("key", "value"), sep = ":")
+  
+  
+
+pass
+  
+```
+
+### Part 1
+
+Need to have...
+
+* byr (Birth Year)
+* iyr (Issue Year)
+* eyr (Expiration Year)
+* hgt (Height)
+* hcl (Hair Color)
+* ecl (Eye Color)
+* pid (Passport ID)
+* cid (Country ID) - optional
+
+```{r}
+keys_needed <- c("byr", "iyr", "eyr", "hgt",
+                 "hcl", "ecl", "pid")
+
+pass %>% 
+  group_by(id) %>%
+  select(id, key) %>% 
+  
+  # sometimes keys repeat
+  
+  distinct() %>% 
+  
+  # count valid keys!
+  
+  summarise(count = sum(key %in% keys_needed)) %>% 
+  filter(count == length(keys_needed))
+  
+```
+
+
