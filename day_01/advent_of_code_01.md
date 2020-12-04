@@ -1,4 +1,4 @@
-🎄🎄🎄day 01 🎄🎄🎄
+🎄🎄🎄day 02 🎄🎄🎄
 ================
 
 ``` r
@@ -76,5 +76,5 @@ bench::mark(
     ## # A tibble: 2 x 6
     ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
     ##   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    ## 1 original     5.54ms   6.89ms      127.    2.03MB     4.32
-    ## 2 faster      30.39µs  35.43µs    21695.   11.03KB     4.34
+    ## 1 original     5.44ms   6.77ms      139.    2.03MB     4.40
+    ## 2 faster      30.47µs  36.42µs    21141.   11.03KB     4.23
