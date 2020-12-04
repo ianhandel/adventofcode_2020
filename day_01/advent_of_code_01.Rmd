@@ -40,7 +40,11 @@ Try a faster way???
 
 Work out what you need to add to each value in fee vector and then intersect this with fee vector.
 
-Yup - faster. But how to do this with part 2???
+Yup - faster.
+
+Originally tried using %in% to find intersect - much slower!
+
+But how to do this with part 2???
 
 ```{r}
 bench::mark(

@@ -51,7 +51,11 @@ Try a faster way???
 Work out what you need to add to each value in fee vector and then
 intersect this with fee vector.
 
-Yup - faster. But how to do this with part 2???
+Yup - faster.
+
+Originally tried using %in% to find intersect - much slower\!
+
+But how to do this with part 2???
 
 ``` r
 bench::mark(
@@ -72,5 +76,5 @@ bench::mark(
     ## # A tibble: 2 x 6
     ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
     ##   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    ## 1 original     5.59ms   6.45ms      133.    2.03MB     4.52
-    ## 2 faster      30.46µs  36.13µs    21550.   11.03KB     4.31
+    ## 1 original     5.54ms   6.89ms      127.    2.03MB     4.32
+    ## 2 faster      30.39µs  35.43µs    21695.   11.03KB     4.34
