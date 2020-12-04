@@ -9,9 +9,12 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ```{r}
 library(tidyverse)
+library(here)
 
-expense <- read_csv("aoc_01.txt", col_names = "fee1")
+expense <- read_csv(here("day_01", "aoc_01.txt"), col_names = "fee1")
 ```
+
+### Part 1
 
 ```{r}
 expense %>%
@@ -20,6 +23,7 @@ expense %>%
   mutate(product = fee1 * fee2)
 ```
 
+### Part 2
 
 ```{r}
 expense %>%

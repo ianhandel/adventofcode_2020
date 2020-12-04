@@ -3,9 +3,12 @@
 
 ``` r
 library(tidyverse)
+library(here)
 
-expense <- read_csv("aoc_01.txt", col_names = "fee1")
+expense <- read_csv(here("day_01", "aoc_01.txt"), col_names = "fee1")
 ```
+
+### Part 1
 
 ``` r
 expense %>%
@@ -19,6 +22,8 @@ expense %>%
     ##   <dbl> <dbl>   <dbl>
     ## 1   409  1611  658899
     ## 2  1611   409  658899
+
+### Part 2
 
 ``` r
 expense %>%
