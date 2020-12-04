@@ -129,7 +129,7 @@ pass %>%
          
          pid_valid = str_detect(pid, "^\\d{9}$")) %>%
   
-  filter(byr_valid & iyr_valid & eyr_valid & hgt_valid & hcl_valid & ecl_valid & pid_valid)
+  filter(across(contains("_valid")))
   
   
 ```
