@@ -29,7 +29,7 @@ forest[1:10, 1:10]
 ### Part 1
 
 ```{r}
-# count tress in forest (recycles forest)
+# count trees in forest (recycles forest)
 
 count_trees <- function(forest, start_x, start_y, step_x, step_y){
 
