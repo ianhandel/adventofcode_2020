@@ -16,6 +16,28 @@ forest <- read_lines(here("day_03", "day_03.txt")) %>%
   stringi::stri_list2matrix(byrow = TRUE)
 ```
 
+``` r
+dim(forest)
+```
+
+    ## [1] 323  31
+
+``` r
+forest[1:10, 1:10]
+```
+
+    ##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+    ##  [1,] "."  "."  "."  "#"  "."  "."  "."  "."  "."  "."  
+    ##  [2,] "."  "."  "."  "#"  "."  "."  "#"  "."  "."  "#"  
+    ##  [3,] "."  "."  "."  "."  "#"  "."  "#"  "."  "."  "."  
+    ##  [4,] "."  "."  "#"  "#"  "."  "."  "."  "."  "."  "#"  
+    ##  [5,] "."  "."  "."  "#"  "."  "."  "."  "."  "."  "."  
+    ##  [6,] "."  "."  "#"  "."  "#"  "."  "."  "."  "#"  "."  
+    ##  [7,] "."  "."  "."  "."  "#"  "#"  "."  "#"  "#"  "#"  
+    ##  [8,] "."  "#"  "."  "."  "#"  "#"  "."  "."  "."  "#"  
+    ##  [9,] "."  "."  "."  "."  "."  "."  "."  "."  "."  "."  
+    ## [10,] "."  "."  "."  "."  "."  "."  "."  "."  "."  "."
+
 ### Part 1
 
 ``` r
@@ -37,7 +59,7 @@ count_trees <- function(forest, start_x, start_y, step_x, step_y){
   
   indices <- cbind((y_locations[1:steps]-1) %% nrow(forest) + 1, (x_locations[1:steps]-1) %% ncol(forest) + 1)
   
-  # count trees - using index a matrix by a matrix - see ?`[
+  # count trees - using index a matrix by a matrix - see ?`[`
   
   sum(forest[indices] == "#")
 }

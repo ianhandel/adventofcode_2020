@@ -21,6 +21,11 @@ forest <- read_lines(here("day_03", "day_03.txt")) %>%
   stringi::stri_list2matrix(byrow = TRUE)
 ```
 
+```{r}
+dim(forest)
+forest[1:10, 1:10]
+```
+
 ### Part 1
 
 ```{r}
