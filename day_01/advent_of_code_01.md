@@ -4,6 +4,7 @@
 ``` r
 library(tidyverse)
 library(here)
+library(bench)
 
 expense <- read_csv(here("day_01", "aoc_01.txt"), col_names = "fee1")
 ```
@@ -42,3 +43,34 @@ expense %>%
     ## 4   485  1285   250 155806250
     ## 5  1285   250   485 155806250
     ## 6  1285   485   250 155806250
+
+### More thoughts
+
+Try a faster way???
+
+Work out what you need to add to each value in fee vector and then
+intersect this with fee vector.
+
+Yup - faster. But how to do this with part 2???
+
+``` r
+bench::mark(
+  original = {
+    expense %>%
+      crossing(fee2 = .$fee1) %>%
+      filter(fee1 + fee2 == 2020) %>%
+      pull(fee1) %>%
+      prod()
+  },
+  faster = {
+    intersect(expense$fee1, 2020 - expense$fee1) %>%
+      prod()
+  }
+)
+```
+
+    ## # A tibble: 2 x 6
+    ##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+    ##   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+    ## 1 original     5.59ms   6.45ms      133.    2.03MB     4.52
+    ## 2 faster      30.46µs  36.13µs    21550.   11.03KB     4.31

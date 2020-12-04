@@ -10,6 +10,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```{r}
 library(tidyverse)
 library(here)
+library(bench)
 
 expense <- read_csv(here("day_01", "aoc_01.txt"), col_names = "fee1")
 ```
@@ -31,4 +32,28 @@ expense %>%
   crossing(fee3 = .$fee1) %>%
   filter(fee1 + fee2 + fee3 == 2020) %>%
   mutate(product = fee1 * fee2 * fee3)
+```
+
+### More thoughts
+
+Try a faster way???
+
+Work out what you need to add to each value in fee vector and then intersect this with fee vector.
+
+Yup - faster. But how to do this with part 2???
+
+```{r}
+bench::mark(
+  original = {
+    expense %>%
+      crossing(fee2 = .$fee1) %>%
+      filter(fee1 + fee2 == 2020) %>%
+      pull(fee1) %>%
+      prod()
+  },
+  faster = {
+    intersect(expense$fee1, 2020 - expense$fee1) %>%
+      prod()
+  }
+)
 ```
