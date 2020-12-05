@@ -10,8 +10,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(tidyverse)
 library(here)
 
-seats <- read_csv(here("day_05", "day_05.txt"), col_names = "seat") %>% 
-  extract(seat, into = c("row", "col"), regex = "(.{7})(.{3})")
+seats <- read_fwf(here("day_05", "day_05.txt"),
+                  col_positions = fwf_cols(row = 7, col = 3))
 
 seats
 ```
