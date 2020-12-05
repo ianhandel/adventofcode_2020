@@ -31,13 +31,11 @@ seats
 ``` r
 seats <- seats %>% 
   
-  # code as binary character (must be a neater way)
+  # code as binary character
   
-  mutate(row = str_replace_all(row, "B", "1"),
-         row = str_replace_all(row, "F", "0"),
-         col = str_replace_all(col, "R", "1"),
-         col = str_replace_all(col, "L", "0")) %>% 
-  
+  mutate(row = str_replace_all(row, c("F" = "0", "B" = "1")),
+         col = str_replace_all(col, c("L" = "0", "R" = "1"))) %>% 
+
   # string to number (2L is binary)
   
   mutate(across(everything(), strtoi, 2L)) %>% 
