@@ -1,0 +1,55 @@
+---
+title: "🎄🎄🎄 day 05  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+
+seats <- read_csv(here("day_05", "day_05.txt"), col_names = "seat") %>% 
+  extract(seat, into = c("row", "col"), regex = "(.{7})(.{3})")
+
+seats
+```
+
+### Part 1
+
+```{r}
+seats <- seats %>% 
+  
+  # code as binary character (must be a neater way)
+  
+  mutate(row = str_replace_all(row, "B", "1"),
+         row = str_replace_all(row, "F", "0"),
+         col = str_replace_all(col, "R", "1"),
+         col = str_replace_all(col, "L", "0")) %>% 
+  
+  # string to number (2L is binary)
+  
+  mutate(across(everything(), strtoi, 2L)) %>% 
+  
+  mutate(id = row * 8 + col)
+
+
+seats %>% 
+  summarise(max(id))
+```
+
+### Part 2
+
+Look for an id difference of 2 then back one
+
+```{r}
+seats %>% 
+  arrange(id) %>% 
+  mutate(diff = id - lag(id)) %>% 
+  filter(diff == 2) %>% 
+  pull(id) %>% 
+  `-`(1)
+```
+
+
