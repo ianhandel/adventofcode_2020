@@ -4,7 +4,7 @@ https://adventofcode.com
 
 [Day 01 expense claim](https://github.com/ianhandel/adventofcode_2020/blob/main/day_01/advent_of_code_01.md)
 
-[Day 02](https://github.com/ianhandel/adventofcode_2020/blob/main/day_02/advent_of_code_02.md)
+[Day 02 password policies](https://github.com/ianhandel/adventofcode_2020/blob/main/day_02/advent_of_code_02.md)
 
 [Day 03 sledging through trees](https://github.com/ianhandel/adventofcode_2020/blob/main/day_03/advent_of_code_03.md)
 
