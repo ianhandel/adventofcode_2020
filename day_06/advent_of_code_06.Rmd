@@ -1,0 +1,38 @@
+---
+title: "🎄🎄🎄 day 06  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+
+read_csv(here("day_06", "day_06.txt"),
+                 col_names = "ans",
+                 skip_empty_rows = FALSE) %>%
+  
+  # make an id row by counting blank rows
+  
+  mutate(id = cumsum(is.na(ans))) %>% 
+  filter(!is.na(ans)) %>% 
+  group_nest(id) %>% 
+  mutate(split = map(data, ~map(.x$ans, str_split, "", simplify = TRUE))) %>% 
+  mutate(union = map(split, ~as.vector(reduce(.x, union)))) %>% 
+  mutate(length = map_int(union, length)) %>% 
+  summarise(total = sum(length))
+
+
+
+
+  
+
+
+  # Break string into characters - probably a better way
+  
+  map(~ str_split(.x, "", simplify = TRUE)) 
+
+```
+
