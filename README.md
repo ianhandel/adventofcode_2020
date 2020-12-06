@@ -12,4 +12,4 @@ https://adventofcode.com
 
 [Day 05 seat allocation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_05/advent_of_code_05.md)
 
-[Day 06](https://github.com/ianhandel/adventofcode_2020/blob/main/day_06/advent_of_code_06.md)
+[Day 06 customs form](https://github.com/ianhandel/adventofcode_2020/blob/main/day_06/advent_of_code_06.md)
