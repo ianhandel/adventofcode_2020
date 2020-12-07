@@ -4,7 +4,6 @@
 ``` r
 library(tidyverse)
 library(here)
-library(data.tree)
 ```
 
 ``` r
@@ -49,7 +48,7 @@ find_outers <- function(inners){
     c(inners) %>% 
     unique()
   
-  # if no new onws stop otherwise recurse to find more wrapping bags
+  # if no new ones stop otherwise recurse to find more wrapping bags
   
   if(length(containing_bags) == length(inners)){
     return(inners)
@@ -59,7 +58,7 @@ find_outers <- function(inners){
 }
 
 
-# Need to subtract one as method includes oringinal!
+# Need to subtract one as method includes oringinal shiny gold bag!
 
 find_outers("shiny gold bag") %>% 
   length() %>% 
@@ -67,3 +66,5 @@ find_outers("shiny gold bag") %>%
 ```
 
     ## [1] 248
+
+### Part 2
