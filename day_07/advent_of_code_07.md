@@ -8,44 +8,62 @@ library(data.tree)
 ```
 
 ``` r
-bags <- read_lines(here("day_07", "test.txt")) %>% 
+bags <- read_lines(here("day_07", "day07.txt")) %>% 
   as_tibble() %>% 
+  mutate(value = str_replace_all(value, "bags", "bag")) %>% 
   extract(value, c("outer", "inner"), regex = "(\\w+ \\w+ \\w+) contain (.+)\\.") %>% 
   separate_rows(inner, sep = ", ") %>%
   separate(inner, c("number", "inner"), " ", extra = "merge") %>% 
   filter(number != "no")
+
+bags
 ```
 
-Try using data.tree
+    ## # A tibble: 1,458 x 3
+    ##    outer              number inner             
+    ##    <chr>              <chr>  <chr>             
+    ##  1 muted lavender bag 5      dull brown bag    
+    ##  2 muted lavender bag 4      pale maroon bag   
+    ##  3 muted lavender bag 2      drab orange bag   
+    ##  4 plaid aqua bag     1      posh violet bag   
+    ##  5 plaid aqua bag     5      pale yellow bag   
+    ##  6 plaid aqua bag     4      bright salmon bag 
+    ##  7 wavy lime bag      3      vibrant indigo bag
+    ##  8 wavy lime bag      1      posh gray bag     
+    ##  9 pale coral bag     5      mirrored olive bag
+    ## 10 pale coral bag     2      posh salmon bag   
+    ## # … with 1,448 more rows
+
+### Part 1
 
 ``` r
-bags$pathString <- paste("world", 
-                            bags$outer, 
-                            bags$inner, 
-                            sep = "/")
+find_outers <- function(inners){
+  
+  # find bags that can wrap the inners
+  # - add in inners with c(inners)
+  # - remove duplicates
+  
+  containing_bags <- bags %>% 
+    inner_join(tibble(inner = inners), by = "inner") %>% 
+    pull(outer) %>% 
+    c(inners) %>% 
+    unique()
+  
+  # if no new onws stop otherwise recurse to find more wrapping bags
+  
+  if(length(containing_bags) == length(inners)){
+    return(inners)
+  }else{
+    find_outers(containing_bags)
+  }
+}
 
-rules <- as.Node(bags)
-print(rules, "number", limit = 20)
+
+# Need to subtract one as method includes oringinal!
+
+find_outers("shiny gold bag") %>% 
+  length() %>% 
+  `-`(1)
 ```
 
-    ##                       levelName number
-    ## 1  world                              
-    ## 2   ¦--light red bags                 
-    ## 3   ¦   ¦--bright white bag          1
-    ## 4   ¦   °--muted yellow bags         2
-    ## 5   ¦--dark orange bags               
-    ## 6   ¦   ¦--bright white bags         3
-    ## 7   ¦   °--muted yellow bags         4
-    ## 8   ¦--bright white bags              
-    ## 9   ¦   °--shiny gold bag            1
-    ## 10  ¦--muted yellow bags              
-    ## 11  ¦   ¦--shiny gold bags           2
-    ## 12  ¦   °--faded blue bags           9
-    ## 13  ¦--shiny gold bags                
-    ## 14  ¦   ¦--dark olive bag            1
-    ## 15  ¦   °--vibrant plum bags         2
-    ## 16  ¦--dark olive bags                
-    ## 17  ¦   ¦--faded blue bags           3
-    ## 18  ¦   °--dotted black bags         4
-    ## 19  °--vibrant plum bags              
-    ## 20      °--... 2 nodes w/ 0 sub
+    ## [1] 248

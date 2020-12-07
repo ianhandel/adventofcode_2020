@@ -13,27 +13,48 @@ library(data.tree)
 ```
 
 ```{r}
-bags <- read_lines(here("day_07", "test.txt")) %>% 
+bags <- read_lines(here("day_07", "day07.txt")) %>% 
   as_tibble() %>% 
+  mutate(value = str_replace_all(value, "bags", "bag")) %>% 
   extract(value, c("outer", "inner"), regex = "(\\w+ \\w+ \\w+) contain (.+)\\.") %>% 
   separate_rows(inner, sep = ", ") %>%
   separate(inner, c("number", "inner"), " ", extra = "merge") %>% 
   filter(number != "no")
 
+bags
 ```
 
 
-Try using data.tree
+### Part 1
 
 ```{r}
+find_outers <- function(inners){
+  
+  # find bags that can wrap the inners
+  # - add in inners with c(inners)
+  # - remove duplicates
+  
+  containing_bags <- bags %>% 
+    inner_join(tibble(inner = inners), by = "inner") %>% 
+    pull(outer) %>% 
+    c(inners) %>% 
+    unique()
+  
+  # if no new onws stop otherwise recurse to find more wrapping bags
+  
+  if(length(containing_bags) == length(inners)){
+    return(inners)
+  }else{
+    find_outers(containing_bags)
+  }
+}
 
-bags$pathString <- paste("world", 
-                            bags$outer, 
-                            bags$inner, 
-                            sep = "/")
 
-rules <- as.Node(bags)
-print(rules, "number", limit = 20)
+# Need to subtract one as method includes oringinal!
+
+find_outers("shiny gold bag") %>% 
+  length() %>% 
+  `-`(1)
 
 ```
 
