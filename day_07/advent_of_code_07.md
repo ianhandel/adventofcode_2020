@@ -70,7 +70,7 @@ find_outers("shiny gold bag") %>%
 
 ### Part 2
 
-This is really ungly and dataframe based as I only think in rectangular
+This is really ugly and dataframe based as I only think in rectangular
 data. Probably much better with lists/tree structure. Same true of
 above.
 
