@@ -1,0 +1,40 @@
+---
+title: "🎄🎄🎄 day 07  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+library(data.tree)
+```
+
+```{r}
+bags <- read_lines(here("day_07", "test.txt")) %>% 
+  as_tibble() %>% 
+  extract(value, c("outer", "inner"), regex = "(\\w+ \\w+ \\w+) contain (.+)\\.") %>% 
+  separate_rows(inner, sep = ", ") %>%
+  separate(inner, c("number", "inner"), " ", extra = "merge") %>% 
+  filter(number != "no")
+
+```
+
+
+Try using data.tree
+
+```{r}
+
+bags$pathString <- paste("world", 
+                            bags$outer, 
+                            bags$inner, 
+                            sep = "/")
+
+rules <- as.Node(bags)
+print(rules, "number", limit = 20)
+
+```
+
+
