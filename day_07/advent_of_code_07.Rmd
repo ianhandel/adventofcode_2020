@@ -96,5 +96,19 @@ while(nrow(inner_bags <- find_inners(outer_bags)) > 0)
 sum(bag_list$number)
 ```
 
+### Part 2 better solution
+
+```{r}
+
+count_bags <- function(bag){
+  sub_bags <- bags$inner[bags$outer == bag]
+  n <- 1L + map_int(sub_bags, count_bags)
+  
+}
+
+count_bags("shiny gold bag")
+
+```
+
 
 
