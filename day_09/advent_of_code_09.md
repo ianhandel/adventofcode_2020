@@ -1,0 +1,29 @@
+🎄🎄🎄 day 09 🎄🎄🎄
+================
+
+``` r
+library(tidyverse)
+library(here)
+
+x <- read_lines(here("day_09", "day09.txt")) %>% 
+  parse_number()
+```
+
+### Part 1
+
+``` r
+check_one <- function(index, n){
+  to_check <- x[(index - 1):(index - n - 1)]
+  sums <- outer(to_check, to_check, `+`)
+  diag(sums) <- NA
+  x[index] %in% sums
+}
+
+check_all <- function(x, n){
+  x[-(1:n)][!map_lgl((1 + n):length(x), check_one, n = n)]
+}
+
+check_all(x, n = 25)
+```
+
+    ## [1] 217430975
