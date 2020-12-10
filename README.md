@@ -17,3 +17,5 @@ https://adventofcode.com
 [Day 07 baggage](https://github.com/ianhandel/adventofcode_2020/blob/main/day_07/advent_of_code_07.md)
 
 [Day 08 infinite code](https://github.com/ianhandel/adventofcode_2020/blob/main/day_08/advent_of_code_08.md)
+
+[Day 09 XMAS code](https://github.com/ianhandel/adventofcode_2020/blob/main/day_09/advent_of_code_09.md)
