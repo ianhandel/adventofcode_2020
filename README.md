@@ -22,4 +22,4 @@ https://adventofcode.com
 
 [Day 10 jolt adaptors](https://github.com/ianhandel/adventofcode_2020/blob/main/day_10/advent_of_code_10.md)
 
-[Day 11 waiting room](https://github.com/ianhandel/adventofcode_2020/blob/main/day_11/advent_of_code_11.md
+[Day 11 waiting room](https://github.com/ianhandel/adventofcode_2020/blob/main/day_11/advent_of_code_11.md)
