@@ -74,3 +74,59 @@ sim(seating)@out[sims] %>% table()
     ## .
     ##    0    1    2 
     ## 1482 5064 2281
+
+## Part 2
+
+``` r
+# make search vectors
+search <- 
+  expand.grid(dc = -1:1,
+            dr = -1:1) %>%
+  filter(!(dc ==0 & dr == 0)) %>% 
+  mutate(direction = 1:8)
+
+check_seat <- function(r, c){
+  if (c <= 0 | c > ncol(room)) return(0) # outside room
+  if (r <= 0 | r > nrow(room)) return(0) # outside room
+  return(room[r, c])
+}
+
+
+# code 1 or 3 for empty
+# code 2 or 4 for full
+# first bit now second bit next
+
+for(ii in 1:100){
+
+  room2 <- room
+
+for (row in 1:nrow(room)) {
+  for (col in 1:ncol(room)) {
+    nfull <- 0
+    for (direction in 1:8) {
+      for (step in 1:max(nrow(room), ncol(room))) {
+        status <- check_seat(
+          c = col + step * search$dc[direction == search$direction],
+          r = row + step * search$dr[direction == search$direction]
+        )
+        if (status %in% 1:2) {
+          break()
+        }
+      }
+      if (status == 2) nfull <- nfull + 1
+    }
+    if (room[row, col] == 2 & nfull >= 5) room2[row, col] <- 1
+    if (room[row, col] == 1 & nfull == 0) room2[row, col] <- 2
+  }
+}
+
+room <- room2
+
+}
+
+table(room)
+```
+
+    ## room
+    ##    0    1    2 
+    ## 1482 5260 2085
