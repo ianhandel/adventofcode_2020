@@ -1,12 +1,7 @@
----
-title: "🎄🎄🎄 day 14  🎄🎄🎄"
-output: github_document
----
-```{r , include = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
+🎄🎄🎄 day 14 🎄🎄🎄
+================
 
-```{r}
+``` r
 library(tidyverse)
 library(here)
 library(binaryLogic)
@@ -21,7 +16,7 @@ x <- tibble(raw = read_lines(here("day_14", "day14.txt"))) %>%
 
 ### Part 1
 
-```{r}
+``` r
 # make sparse memmory dataframe
 memory <- x %>%
   filter(inst == "mem") %>%
@@ -61,3 +56,5 @@ for (ii in 1:nrow(x)) {
 sum(memory$value) %>%
   format(digits = 20)
 ```
+
+    ## [1] "9967721333886"
