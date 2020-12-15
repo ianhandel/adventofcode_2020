@@ -27,3 +27,7 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 [Day 12 ferry navigation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_12/advent_of_code_12.md)
 
 [Day 13 bus timetable](https://github.com/ianhandel/adventofcode_2020/blob/main/day_13/advent_of_code_13.md)
+
+[Day 14 ferry computer](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md)
+
+(Still working on part 2)
