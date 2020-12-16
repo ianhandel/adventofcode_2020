@@ -28,6 +28,6 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 
 [Day 13 bus timetable](https://github.com/ianhandel/adventofcode_2020/blob/main/day_13/advent_of_code_13.md)
 
-[Day 14 ferry computer](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md)
+[Day 14 ferry computer](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md) (Still working on part 2)
 
-(Still working on part 2)
+[Day 15 elf game](https://github.com/ianhandel/adventofcode_2020/blob/main/day_15/advent_of_code_15.md) (Trying part 2 soon!)
