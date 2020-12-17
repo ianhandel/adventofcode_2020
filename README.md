@@ -31,3 +31,5 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 [Day 14 ferry computer](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md) (Still working on part 2)
 
 [Day 15 elf game](https://github.com/ianhandel/adventofcode_2020/blob/main/day_15/advent_of_code_15.md)
+
+[Day 16 tickets](https://github.com/ianhandel/adventofcode_2020/blob/main/day_16/advent_of_code_16.md) (Still working on part 2)
