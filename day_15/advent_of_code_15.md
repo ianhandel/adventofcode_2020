@@ -13,9 +13,9 @@ Ugly and super ugly as indexes off 1
 
 ``` r
 elf <- function(n) {
-  times <- numeric(n + 1)
-  last <- numeric(n + 1)
-  previous <- numeric(n + 1)
+  times <- integer(n + 1)
+  last <- integer(n + 1)
+  previous <- integer(n + 1)
 
   last[x + 1] <- seq_along(x)
   times[x + 1] <- 1

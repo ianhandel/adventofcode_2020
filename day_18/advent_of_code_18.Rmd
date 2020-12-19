@@ -1,0 +1,27 @@
+---
+title: "🎄🎄🎄 day 18  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+
+
+x <- read_lines(here("day_18", "day18.txt"))
+
+```
+
+2 * 3 + (4 * 5) becomes 26.
+5 + (8 * 3 + 9 + 3 * 4 * 3) becomes 437.
+5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4)) becomes 12240.
+((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2 becomes 13632.
+
+
+```{r}
+expression(5 + (8 * 3 + 9 + 3 * 4 * 3))
+```
+

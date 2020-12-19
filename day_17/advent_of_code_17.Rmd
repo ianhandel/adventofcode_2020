@@ -1,0 +1,41 @@
+---
+title: "🎄🎄🎄 day 17  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+```
+```{r}
+x <- read_lines(here("day_17", "test.txt")) %>% 
+  map(~ str_split(.x, "", simplify = TRUE)) %>% 
+  stringi::stri_list2matrix(byrow = TRUE)
+
+x <- which(x == "#", arr.ind = TRUE) %>%
+  as_tibble() %>% 
+  rename(x = row, y = col) %>% 
+  mutate(z = 1L)
+
+x
+
+neighbours <- crossing(dx = -1:1, dy = -1:1, dz = -1:1) %>%
+  filter(!(dx == 0 & dy == 0 & dz == 0))
+```
+### Part 1
+
+Thanks @drob for crossing / expand grid way of grabbing all neighbours
+
+```{r}
+x %>%
+  crossing(neighbours) %>% 
+  mutate(nx = x + dx,
+         ny = y + dy,
+         nz = z + dz)
+  
+
+```
+

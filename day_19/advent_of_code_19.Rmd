@@ -1,0 +1,45 @@
+---
+title: "🎄🎄🎄 day 19  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+```{r}
+library(tidyverse)
+library(here)
+
+# splitting code from @drob day 16
+x <- read_lines(here("day_19", "test.txt")) %>% 
+  as_tibble() %>% 
+  mutate(group = c("rules", "mesage")[cumsum(value == "") + 1]) %>% 
+  filter(value != "") %>% 
+  nest(cols = value) %>% 
+  spread(group, cols) %>% 
+  map(1)
+```
+
+### Part 1
+
+```{r}
+rules <- x$rules %>% 
+  separate(value, c("id1", "rule"), sep = ": ") %>% 
+  separate_rows(rule, sep = "\\|") %>% 
+  group_by(id1) %>% 
+  separate_rows(rule, sep = "\\|") %>% 
+  mutate(id2 = 1:n()) %>% 
+  ungroup() %>% 
+  mutate(rule = str_split(str_trim(rule), " ")) %>% 
+  mutate(rule = map(rule, ~str_remove_all(.x, "\"")))
+
+make_rule <- function(rule){
+  if (str_detect(rule, "a|b|\\|")){
+    return(paste(rule))
+  }else{
+    return(c("|", map(rule, ~ map(rules$rule[rules$id1 == .x], make_rule))))
+  }
+}
+
+make_rule(r$rule[[1]]) %>% unlist()
+```
+
