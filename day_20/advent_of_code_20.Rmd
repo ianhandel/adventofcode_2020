@@ -1,0 +1,21 @@
+---
+title: "🎄🎄🎄 day 20  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+
+x <- tibble(val = read_lines(here("day_20", "test.txt"))) %>% 
+  extract(val, into = "id", regex = "(Tile \\d+)", remove = FALSE) %>%
+  fill(id) %>% 
+  extract(val, into = "tile", regex = "([\\.|#]+)") %>% 
+  filter(!is.na(tile)) %>% 
+  nest(data = c(tile))
+
+```
+
