@@ -64,7 +64,7 @@ Working on this!
 # 11: 42 31 | 42 11 31
 
 rules <- rules %>%
-  mutate(rule = case_when(id == "8" ~ "42 | 42 42 | 42 42 42 | 42 42 42 42 | 42 42 42 42 42 ",
+  mutate(rule = case_when(id == "8" ~ "42 | 42 42 | 42 42 42 | 42 42 42 42 | 42 42 42 42 42",
                           id == "11" ~ "42 31 | 42 42 31 31 | 42 42 42 31 31 31 | 42 42 42 42 31 31 31 31",
                           TRUE ~ rule))
 
@@ -78,6 +78,8 @@ find_rule <- function(rule_id) {
   str_glue("({new})")
 }
 
+rule <- find_rule(0)
+
 while (str_detect(rule, "[0-9]")) {
   rule <- str_replace_all(rule,
     "\\d+",
@@ -87,6 +89,8 @@ while (str_detect(rule, "[0-9]")) {
 
 final_rule <- str_remove_all(rule, " ") 
 final_rule <- str_glue("^{final_rule}$")
+final_rule <- str_replace_all(final_rule, "\\(a\\)", "a")
+final_rule <- str_replace_all(final_rule, "\\(b\\)", "b")
 
 x$message %>%
   mutate(OK = str_detect(value, final_rule)) %>% 
@@ -96,5 +100,5 @@ x$message %>%
     ## # A tibble: 2 x 2
     ##   OK        n
     ##   <lgl> <int>
-    ## 1 FALSE   245
-    ## 2 TRUE    198
+    ## 1 FALSE    71
+    ## 2 TRUE    372
