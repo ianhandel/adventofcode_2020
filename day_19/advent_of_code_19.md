@@ -1,11 +1,7 @@
----
-title: "🎄🎄🎄 day 19  🎄🎄🎄"
-output: github_document
----
-```{r , include = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
-```{r}
+🎄🎄🎄 day 19 🎄🎄🎄
+================
+
+``` r
 library(tidyverse)
 library(here)
 
@@ -21,7 +17,7 @@ x <- read_lines(here("day_19", "day19.txt")) %>%
 
 ### Part 1
 
-```{r}
+``` r
 rules <- x$rules %>%
   separate(value, c("id", "rule"), sep = ": ") %>%
   mutate(rule = map_chr(rule, ~ str_remove_all(.x, "\"")))
@@ -53,9 +49,15 @@ x$message %>%
   count(OK)
 ```
 
+    ## # A tibble: 2 x 2
+    ##   OK        n
+    ##   <lgl> <int>
+    ## 1 FALSE   245
+    ## 2 TRUE    198
+
 ### Part 2
 
-```{r}
+``` r
 # 8: 42 | 42 8
 # 11: 42 31 | 42 11 31
 
@@ -89,4 +91,8 @@ x$message %>%
   count(OK)
 ```
 
-
+    ## # A tibble: 2 x 2
+    ##   OK        n
+    ##   <lgl> <int>
+    ## 1 FALSE   245
+    ## 2 TRUE    198
