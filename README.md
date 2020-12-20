@@ -32,6 +32,6 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 
 [Day 15 rambunctious recitation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_15/advent_of_code_15.md)
 
-[Day 16 ticket transaltion](https://github.com/ianhandel/adventofcode_2020/blob/main/day_16/advent_of_code_16.md) (Still working on part 2)
+[Day 16 ticket translation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_16/advent_of_code_16.md) (Still working on part 2)
 
 [Day 19 monster messages](https://github.com/ianhandel/adventofcode_2020/blob/main/day_19/advent_of_code_19.md)
