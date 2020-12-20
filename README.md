@@ -2,7 +2,7 @@
 
 My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 
-[Day 01 report repair] (https://github.com/ianhandel/adventofcode_2020/blob/main/day_01/advent_of_code_01.md)
+[Day 01 report repair](https://github.com/ianhandel/adventofcode_2020/blob/main/day_01/advent_of_code_01.md)
 
 [Day 02 password philsophy](https://github.com/ianhandel/adventofcode_2020/blob/main/day_02/advent_of_code_02.md)
 
