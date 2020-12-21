@@ -1,0 +1,44 @@
+---
+title: "🎄🎄🎄 day 21  🎄🎄🎄"
+output: github_document
+---
+```{r , include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(here)
+
+x <- read_lines(here("day_21", "test.txt")) %>%
+  as_tibble() %>%
+  extract(value, c("ingredients", "allergens"), "(.+) \\(contains (.+)\\)") %>%
+  mutate(food = 1:n()) %>%
+  separate_rows(allergens, sep = ", ") %>%
+  mutate(ingredients = map(ingredients, ~ unlist(str_split(.x, " "))))
+```
+
+### Part 1
+
+```{r}
+map(
+  unique(x$allergens) %>% set_names(),
+  ~ x %>%
+    filter(allergens == .x) %>%
+    pull(ingredients) %>%
+    reduce(intersect)
+)
+
+uniq_ingredients <- reduce(x$ingredients, c) %>% unique()
+
+x %>% 
+  filter(map_lgl(ingredients, ~any("sbzzf" %in% .x)))
+```
+
+mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
+trh fvjkl sbzzf mxmxvkd (contains dairy)
+sqjhc fvjkl (contains soy)
+sqjhc mxmxvkd sbzzf (contains fish)
+
+In the above example, none of the ingredients
+kfcds, nhms, sbzzf, or trh can contain an allergen.
