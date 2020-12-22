@@ -36,4 +36,4 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 
 [Day 19 monster messages](https://github.com/ianhandel/adventofcode_2020/blob/main/day_19/advent_of_code_19.md)
 
-[Day 22 crab combat](https://github.com/ianhandel/adventofcode_2020/blob/main/day_22/advent_of_code_2.md)
+[Day 22 crab combat](https://github.com/ianhandel/adventofcode_2020/blob/main/day_22/advent_of_code_22.md)
