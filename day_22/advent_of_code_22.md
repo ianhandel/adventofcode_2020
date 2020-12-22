@@ -1,0 +1,55 @@
+🎄🎄🎄 day 22 🎄🎄🎄
+================
+
+``` r
+library(tidyverse)
+library(here)
+library(rstackdeque) # for FIFO stacks
+
+x <- read_lines(here("day_22", "day22.txt")) %>% 
+  as_tibble() %>% 
+  extract(value, into = "player", "(Player \\d):", remove = FALSE) %>% 
+  extract(value, into = "card", "^(\\d+)", convert = TRUE) %>% 
+  fill(player) %>% 
+  filter(!is.na(card)) %>% 
+  group_by(player) %>% 
+  mutate(position = 1:n()) %>% 
+  ungroup()
+```
+
+### Part 1
+
+``` r
+decks <- list(as.rdeque(x$card[x$player == "Player 1"]),
+              as.rdeque(x$card[x$player == "Player 2"]))
+
+while (all(map(decks, length) > 0)) {
+  
+  winner <- as.integer(peek_front(decks[[1]]) <
+    peek_front(decks[[2]])) + 1
+
+  loser <- 2 - winner + 1
+
+  decks[[winner]] <- insert_back(
+    decks[[winner]],
+    peek_front(decks[[winner]])
+  )
+  decks[[winner]] <- insert_back(
+    decks[[winner]],
+    peek_front(decks[[loser]])
+  )
+
+  decks <- map(decks, without_front)
+
+  decks
+}
+
+map(decks, as.list) %>%
+  map(unlist) %>%
+  keep(~length(.x) > 0) %>% 
+  map(~.x * length(.x):1) %>% 
+  map(sum)
+```
+
+    ## [[1]]
+    ## [1] 31269
