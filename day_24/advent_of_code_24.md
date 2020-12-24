@@ -57,7 +57,7 @@ tiles %>%
 ``` r
 ggplot(tiles) +
   aes(x, y, fill = factor(n)) +
-  geom_hex(stat = "identity", colour = "white") +
+  geom_hex(stat = "identity", colour = "grey90") +
   scale_fill_manual(values = c("black", "red")) +
   theme_void() +
   theme(legend.position = "none") +
