@@ -5,6 +5,7 @@
 library(tidyverse)
 library(here)
 
+# hexagonal compass lookup table
 r3 <- sqrt(3)
 lkup <- tribble(~compass, ~x, ~y,
                "w", -1, 0,
@@ -13,7 +14,10 @@ lkup <- tribble(~compass, ~x, ~y,
                "ne", +1/2, r3/2,
                "sw", -1/2, -r3/2,
                "se", +1/2, -r3/2
-               )
+               ) %>% 
+  mutate(num = 1:n())
+
+# fn to transalte and collapse flips
 
 collapse_flips <- function(flips){
   tibble(compass = flips[[1]]) %>% 
@@ -21,7 +25,9 @@ collapse_flips <- function(flips){
     summarise(x = sum(x), y = sum(y))
 }
 
-read_lines(here("day_24","input.txt")) %>%
+# do flips
+
+tiles <- read_lines(here("day_24","input.txt")) %>%
   as_tibble() %>% 
   mutate(instruction = 1:n()) %>% 
   mutate(compass = map(value, str_extract_all, "(w|e|nw|ne|sw|se)")) %>% 
@@ -32,6 +38,8 @@ read_lines(here("day_24","input.txt")) %>%
   tally() %>% 
   ungroup() %>% 
   count(n)
+
+tiles
 ```
 
     ## # A tibble: 2 x 2
