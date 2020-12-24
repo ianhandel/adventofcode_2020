@@ -4,7 +4,11 @@
 ``` r
 library(tidyverse)
 library(here)
+```
 
+### Part 1
+
+``` r
 # hexagonal compass lookup table
 r3 <- sqrt(3)
 lkup <- tribble(~compass, ~x, ~y,
@@ -35,11 +39,13 @@ tiles <- read_lines(here("day_24","input.txt")) %>%
   unnest(collapse) %>% 
   select(-compass) %>% 
   group_by(x, y) %>% 
-  tally() %>% 
+  tally()
+
+
+
+tiles %>% 
   ungroup() %>% 
   count(n)
-
-tiles
 ```
 
     ## # A tibble: 2 x 2
@@ -47,3 +53,18 @@ tiles
     ##   <int> <int>
     ## 1     1   346
     ## 2     2    31
+
+``` r
+ggplot(tiles) +
+  aes(x, y, fill = factor(n)) +
+  geom_hex(stat = "identity", colour = "white") +
+  scale_fill_manual(values = c("black", "red")) +
+  theme_void() +
+  theme(legend.position = "none") +
+  coord_equal() +
+  labs(captions = "red tiles:- flipped twice")
+```
+
+![](advent_of_code_24_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+### Part 2

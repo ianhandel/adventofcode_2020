@@ -45,11 +45,22 @@ tiles <- read_lines(here("day_24","input.txt")) %>%
   unnest(collapse) %>% 
   select(-compass) %>% 
   group_by(x, y) %>% 
-  tally() %>% 
+  tally()
+
+
+
+tiles %>% 
   ungroup() %>% 
   count(n)
 
-tiles
+ggplot(tiles) +
+  aes(x, y, fill = factor(n)) +
+  geom_hex(stat = "identity", colour = "white") +
+  scale_fill_manual(values = c("black", "red")) +
+  theme_void() +
+  theme(legend.position = "none") +
+  coord_equal() +
+  labs(captions = "red tiles:- flipped twice")
 ```
 
 ### Part 2
