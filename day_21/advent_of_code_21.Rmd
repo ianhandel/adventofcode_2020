@@ -14,7 +14,7 @@ x <- read_lines(here("day_21", "test.txt")) %>%
   as_tibble() %>%
   extract(value, c("ingredients", "allergens"), "(.+) \\(contains (.+)\\)") %>%
   mutate(food = 1:n()) %>%
-  separate_rows(allergens, sep = ", ") %>%
+  mutate(allergens = map(allergens, ~ unlist(str_split(.x, ", ")))) %>% 
   mutate(ingredients = map(ingredients, ~ unlist(str_split(.x, " "))))
 ```
 

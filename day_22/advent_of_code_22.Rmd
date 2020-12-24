@@ -45,8 +45,6 @@ while (all(map(decks, length) > 0)) {
   )
 
   decks <- map(decks, without_front)
-
-  decks
 }
 
 map(decks, as.list) %>%
