@@ -28,12 +28,14 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 
 [Day 13 shuttle search](https://github.com/ianhandel/adventofcode_2020/blob/main/day_13/advent_of_code_13.md)
 
-[Day 14 docking data](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md) (Still working on part 2)
+[Day 14 docking data](https://github.com/ianhandel/adventofcode_2020/blob/main/day_14/advent_of_code_14.md) (just part 1)
 
 [Day 15 rambunctious recitation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_15/advent_of_code_15.md)
 
-[Day 16 ticket translation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_16/advent_of_code_16.md) (Still working on part 2)
+[Day 16 ticket translation](https://github.com/ianhandel/adventofcode_2020/blob/main/day_16/advent_of_code_16.md) (just part 1)
 
-[Day 19 monster messages](https://github.com/ianhandel/adventofcode_2020/blob/main/day_19/advent_of_code_19.md)
+[Day 19 monster messages](https://github.com/ianhandel/adventofcode_2020/blob/main/day_19/advent_of_code_19.md) (just part 1)
 
-[Day 22 crab combat](https://github.com/ianhandel/adventofcode_2020/blob/main/day_22/advent_of_code_22.md)
+[Day 22 crab combat](https://github.com/ianhandel/adventofcode_2020/blob/main/day_22/advent_of_code_22.md) (just part 1)
+
+[Day 24 loby layout](https://github.com/ianhandel/adventofcode_2020/blob/main/day_24/advent_of_code_24.md) (just part 1)

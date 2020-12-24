@@ -9,7 +9,12 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```{r}
 library(tidyverse)
 library(here)
+```
 
+
+### Part 1
+
+```{r}
 # hexagonal compass lookup table
 r3 <- sqrt(3)
 lkup <- tribble(~compass, ~x, ~y,
@@ -46,4 +51,11 @@ tiles <- read_lines(here("day_24","input.txt")) %>%
 
 tiles
 ```
+
+### Part 2
+
+```{r}
+
+```
+
 
