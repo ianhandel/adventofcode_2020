@@ -39,3 +39,6 @@ My increasingly ugly solutions (or attempts) at  https://adventofcode.com
 [Day 22 crab combat](https://github.com/ianhandel/adventofcode_2020/blob/main/day_22/advent_of_code_22.md) (just part 1)
 
 [Day 24 loby layout](https://github.com/ianhandel/adventofcode_2020/blob/main/day_24/advent_of_code_24.md) (just part 1)
+
+[Day 25 combo breaker](https://github.com/ianhandel/adventofcode_2020/blob/main/day_25/advent_of_code_25.md) (need to get rest of stars)
+
