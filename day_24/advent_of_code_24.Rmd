@@ -34,10 +34,13 @@ collapse_flips <- function(flips){
     left_join(lkup, by = "compass") %>% 
     summarise(x = sum(x), y = sum(y))
 }
+```
+
+```{r}
 
 # do flips
 
-tiles <- read_lines(here("day_24","input.txt")) %>%
+tiles <- read_lines(here("day_24","test.txt")) %>%
   as_tibble() %>% 
   mutate(instruction = 1:n()) %>% 
   mutate(compass = map(value, str_extract_all, "(w|e|nw|ne|sw|se)")) %>% 
@@ -45,12 +48,12 @@ tiles <- read_lines(here("day_24","input.txt")) %>%
   unnest(collapse) %>% 
   select(-compass) %>% 
   group_by(x, y) %>% 
-  tally()
+  tally() %>% 
+  ungroup()
 
 
 
 tiles %>% 
-  ungroup() %>% 
   count(n)
 
 ggplot(tiles) +
@@ -65,8 +68,37 @@ ggplot(tiles) +
 
 ### Part 2
 
-```{r}
+1. Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
+2. Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
 
+```{r}
+# just record black tiles
+tiles <- tiles %>% 
+  filter(n == 1)
+
+
+count_neighbours <- function(x, y){
+  tibble(x, y) %>% 
+    crossing(lkup %>% rename(dx = x, dy = y)) %>% 
+    mutate(nx = x + dx,
+           ny = y + dy) %>% 
+    left_join(tiles, by = c("nx" = "x", "ny" = "y")) %>% 
+    summarise(total = sum(n, na.rm = TRUE)) %>% 
+    pull(total)
+}
+
+
+for(ii in 1:100){
+  print(ii)
+  flush.console()
+  tiles %>% 
+  mutate(neighbours = map2_int(x, y, count_neighbours)) %>%
+  mutate(n = case_when(n == 1 & neighbours == 0 ~ 2,
+                       n == 1 & neighbours >  2 ~ 2,
+                       n == 2 & neighbours == 2 ~ 1))
+}
+
+  
 ```
 
 
