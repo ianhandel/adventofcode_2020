@@ -22,6 +22,15 @@ x <- read_lines(here("day_18", "day18.txt"))
 
 
 ```{r}
-expression(5 + (8 * 3 + 9 + 3 * 4 * 3))
+x <- "((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"
+
+domath <- function(x){
+  l <- str_extract(x, "\\d+")
+  op <- str_extract(x, "\\*|\\+")
+  r <- str_remove(x, "^ (\\d|\\+|\\*)")
+  list(l, op, r)
+}
+
+"((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2" %>% domath()
 ```
 
