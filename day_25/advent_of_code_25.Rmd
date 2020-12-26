@@ -9,7 +9,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```{r}
 library(tidyverse)
 library(here)
-library(memoise)
+library(VeryLargeIntegers)
 ```
 
 puzzle input
@@ -20,44 +20,27 @@ test
 5764801
 17807724
 
-The handshake used by the card and the door involves an operation that transforms a subject number. To transform a subject number, start with the value 1. Then, a number of times called the loop size, perform the following steps:
+Thanks to Cameron for ```subnum^loops %% x`` identity, which I didn't end up using.
 
-Set the value to itself multiplied by the subject number.
-Set the value to the remainder after dividing the value by 20201227.
-
+### Part 1
 
 ```{r}
-# need ways to encode fast! I think
 
-# too slow
-# encode <- function(subnum, loops){
-#   value <- 1
-#   for(ii in 1:loops){
-#     value <-  (value * subnum) %% 20201227
-#   }
-#   value
-# }
-
-
-# not big enough
-# subnum <- 7
-# encodes <- accumulate(1:10000000, ~(.x * subnum) %% 20201227)[-1]
-# encode <- function(loops) encodes[loops]
-
-
-
-
-find_loops <- function(code){
-  loops <- 1
-  while(encode(loops) != code){
-    loops <- loops + 1
+encode <- function(subnum, loops) {
+  value <- 1
+  for (ii in 1:loops) {
+    value <- (value * subnum) %% 20201227
   }
-  loops
+  value
 }
 
-find_loops(8458505)
+# must be a better way as slow and big
+bench::mark(
+  encodes <- accumulate(1:20000000, ~ (.x * 7) %% 20201227)[-1],
+  iterations = 1
+)
 
-
+# find loops and apply to other public key
+loops <- which(encodes == 8458505, arr.ind = TRUE)
+encode(subnum = 16050997, loops = loops)
 ```
-
-
